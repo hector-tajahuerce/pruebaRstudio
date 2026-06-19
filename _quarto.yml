@@ -3,8 +3,8 @@ project:
   output-dir: docs
 
 website:
-  title: "Stratadata"
-  description: "Observatorio de datos sobre defensa, conflicto armado y poder tecnológico"
+  title: "PruebaRstudio"
+  description: ""
   navbar:
     left:
       - href: index.qmd
