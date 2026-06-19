@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Stratadata"
+  description: "Observatorio de datos sobre defensa, conflicto armado y poder tecnológico"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+
+format:
+  html:
+    theme: cosmo
+    code-fold: true
+    code-summary: "Ver código"
+    lang: es

@@ -1,0 +1,12 @@
+---
+title: "Stratadata"
+listing:
+  contents: entries
+  type: grid
+  image-height: 200px
+  fields: [image, title]
+---
+
+Observatorio cuantitativo de datos sobre defensa, conflicto armado y poder tecnológico. 
+Cada entrada cruza variables de fuentes públicas para analizar cómo la tecnología 
+y el gasto militar están reconfigurando el orden internacional.

@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Stratadata",
+    "section": "",
+    "text": "Observatorio cuantitativo de datos sobre defensa, conflicto armado y poder tecnológico. Cada entrada cruza variables de fuentes públicas para analizar cómo la tecnología y el gasto militar están reconfigurando el orden internacional.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGasto en defensa de los países de la OTAN\n\n\n\n\n\nNo hay resultados"
+  },
+  {
+    "objectID": "entries/01-nato-defense-spending/index.html",
+    "href": "entries/01-nato-defense-spending/index.html",
+    "title": "Gasto en defensa de los países de la OTAN",
+    "section": "",
+    "text": "Ver código\nlibrary(readxl)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\n\nraw &lt;- read_excel(\"data/SIPRI-Milex-data-1949-2025_v1.2.xlsx\", \n                  sheet = \"Share of GDP\",\n                  skip = 5)\n\notan &lt;- c(\"United States of America\", \"United Kingdom\", \"France\", \"Germany\", \"Italy\",\n          \"Spain\", \"Poland\", \"Netherlands\", \"Belgium\", \"Portugal\", \"Norway\",\n          \"Denmark\", \"Greece\", \"Türkiye\", \"Romania\", \"Hungary\", \"Czechia\",\n          \"Slovakia\", \"Bulgaria\", \"Croatia\", \"Albania\", \"Montenegro\",\n          \"North Macedonia\", \"Latvia\", \"Lithuania\", \"Estonia\", \"Luxembourg\",\n          \"Slovenia\", \"Canada\")\n\nnato_long &lt;- raw %&gt;%\n  filter(Country %in% otan) %&gt;%\n  select(Country, `2014`:`2024`) %&gt;%\n  pivot_longer(cols = `2014`:`2024`, names_to = \"year\", values_to = \"gdp_share\") %&gt;%\n  mutate(gdp_share = as.numeric(gdp_share) * 100, year = as.integer(year))\n\nggplot(nato_long, aes(x = year, y = reorder(Country, gdp_share), fill = gdp_share)) +\n  geom_tile(color = \"white\", linewidth = 0.4) +\n  scale_fill_gradient(low = \"#f7fcf5\", high = \"#005a32\", na.value = \"grey90\", name = \"% PIB\") +\n  scale_x_continuous(breaks = 2014:2024, expand = c(0, 0)) +\n  scale_y_discrete(expand = c(0, 0)) +\n  coord_fixed(ratio = 0.4) +\n  labs(x = NULL, y = NULL) +\n  theme_minimal(base_size = 10) +\n  theme(panel.grid = element_blank(),\n        axis.text.x = element_text(size = 8),\n        axis.text.y = element_text(size = 8),\n        legend.position = \"none\")"
+  },
+  {
+    "objectID": "entries/01-nato-defense-spending/index.html#gráfico",
+    "href": "entries/01-nato-defense-spending/index.html#gráfico",
+    "title": "Gasto en defensa de los países de la OTAN",
+    "section": "",
+    "text": "Ver código\nlibrary(readxl)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\n\nraw &lt;- read_excel(\"data/SIPRI-Milex-data-1949-2025_v1.2.xlsx\", \n                  sheet = \"Share of GDP\",\n                  skip = 5)\n\notan &lt;- c(\"United States of America\", \"United Kingdom\", \"France\", \"Germany\", \"Italy\",\n          \"Spain\", \"Poland\", \"Netherlands\", \"Belgium\", \"Portugal\", \"Norway\",\n          \"Denmark\", \"Greece\", \"Türkiye\", \"Romania\", \"Hungary\", \"Czechia\",\n          \"Slovakia\", \"Bulgaria\", \"Croatia\", \"Albania\", \"Montenegro\",\n          \"North Macedonia\", \"Latvia\", \"Lithuania\", \"Estonia\", \"Luxembourg\",\n          \"Slovenia\", \"Canada\")\n\nnato_long &lt;- raw %&gt;%\n  filter(Country %in% otan) %&gt;%\n  select(Country, `2014`:`2024`) %&gt;%\n  pivot_longer(cols = `2014`:`2024`, names_to = \"year\", values_to = \"gdp_share\") %&gt;%\n  mutate(gdp_share = as.numeric(gdp_share) * 100, year = as.integer(year))\n\nggplot(nato_long, aes(x = year, y = reorder(Country, gdp_share), fill = gdp_share)) +\n  geom_tile(color = \"white\", linewidth = 0.4) +\n  scale_fill_gradient(low = \"#f7fcf5\", high = \"#005a32\", na.value = \"grey90\", name = \"% PIB\") +\n  scale_x_continuous(breaks = 2014:2024, expand = c(0, 0)) +\n  scale_y_discrete(expand = c(0, 0)) +\n  coord_fixed(ratio = 0.4) +\n  labs(x = NULL, y = NULL) +\n  theme_minimal(base_size = 10) +\n  theme(panel.grid = element_blank(),\n        axis.text.x = element_text(size = 8),\n        axis.text.y = element_text(size = 8),\n        legend.position = \"none\")"
+  },
+  {
+    "objectID": "entries/01-nato-defense-spending/index.html#fuente",
+    "href": "entries/01-nato-defense-spending/index.html#fuente",
+    "title": "Gasto en defensa de los países de la OTAN",
+    "section": "Fuente",
+    "text": "Fuente\nSIPRI Military Expenditure Database. Disponible en: sipri.org/databases/milex"
+  },
+  {
+    "objectID": "entries/01-nato-defense-spending/index.html#nota-metodológica",
+    "href": "entries/01-nato-defense-spending/index.html#nota-metodológica",
+    "title": "Gasto en defensa de los países de la OTAN",
+    "section": "Nota metodológica",
+    "text": "Nota metodológica\nEl indicador representa el gasto en defensa de cada país como porcentaje de su PIB. Un valor alto no implica necesariamente mayor capacidad militar absoluta, sino mayor esfuerzo relativo respecto al tamaño de la economía."
+  }
+]

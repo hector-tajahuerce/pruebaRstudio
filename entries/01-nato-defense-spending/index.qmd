@@ -1,0 +1,57 @@
+---
+title: "Gasto en defensa de los países de la OTAN"
+image: heatmap_otan.png
+date: 2026-06-19
+---
+
+## Gráfico
+
+```{r}
+#| warning: false
+#| message: false
+
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+raw <- read_excel("data/SIPRI-Milex-data-1949-2025_v1.2.xlsx", 
+                  sheet = "Share of GDP",
+                  skip = 5)
+
+otan <- c("United States of America", "United Kingdom", "France", "Germany", "Italy",
+          "Spain", "Poland", "Netherlands", "Belgium", "Portugal", "Norway",
+          "Denmark", "Greece", "Türkiye", "Romania", "Hungary", "Czechia",
+          "Slovakia", "Bulgaria", "Croatia", "Albania", "Montenegro",
+          "North Macedonia", "Latvia", "Lithuania", "Estonia", "Luxembourg",
+          "Slovenia", "Canada")
+
+nato_long <- raw %>%
+  filter(Country %in% otan) %>%
+  select(Country, `2014`:`2024`) %>%
+  pivot_longer(cols = `2014`:`2024`, names_to = "year", values_to = "gdp_share") %>%
+  mutate(gdp_share = as.numeric(gdp_share) * 100, year = as.integer(year))
+
+ggplot(nato_long, aes(x = year, y = reorder(Country, gdp_share), fill = gdp_share)) +
+  geom_tile(color = "white", linewidth = 0.4) +
+  scale_fill_gradient(low = "#f7fcf5", high = "#005a32", na.value = "grey90", name = "% PIB") +
+  scale_x_continuous(breaks = 2014:2024, expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0)) +
+  coord_fixed(ratio = 0.4) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 10) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 8),
+        legend.position = "none")
+```
+
+## Fuente
+
+SIPRI Military Expenditure Database. Disponible en: sipri.org/databases/milex
+
+## Nota metodológica
+
+El indicador representa el gasto en defensa de cada país como porcentaje de su PIB. 
+Un valor alto no implica necesariamente mayor capacidad militar absoluta, 
+sino mayor esfuerzo relativo respecto al tamaño de la economía.
