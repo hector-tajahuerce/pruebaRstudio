@@ -1,0 +1,42 @@
+---
+title: "TÍTULO DE LA ENTRADA"
+image: miniatura.png
+date: YYYY-MM-DD
+---
+
+## Gráfico
+
+````{r}
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 7
+
+# Librerías
+
+
+# Cargar datos
+# datos <- read_csv("data/ARCHIVO.csv")
+
+# Gráfico
+
+````
+
+## Fuente
+
+FUENTE. Disponible en: URL
+
+## Nota metodológica
+
+DESCRIPCIÓN de las variables, unidades, y criterios de filtrado aplicados.
+````
+````
+
+```{r}
+#| include: false
+
+# Genera la miniatura automáticamente al renderizar
+png("miniatura.png", width = 800, height = 800, res = 150)
+# REPETIR AQUÍ EL CÓDIGO DEL GRÁFICO
+dev.off()
+```

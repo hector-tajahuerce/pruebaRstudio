@@ -72,3 +72,26 @@ SIPRI Arms Transfers Database. Disponible en: sipri.org/databases/armstransfers
 ## Nota metodológica
 
 Los flujos representan transferencias de armas mayores expresadas en millones de TIV (Trend Indicator Values), unidad propia de SIPRI que mide el valor de transferencia según capacidad militar del sistema, no precio de mercado. Se incluyen únicamente los flujos que superan el 20% de las importaciones totales de cada receptor en el periodo 2014-2025.
+
+```{r}
+#| include: false
+
+png("chord_armstransfers.png", width = 800, height = 800, res = 150)
+par(mar = c(0, 0, 0, 0))
+circos.clear()
+circos.par(gap.after = c(rep(2, length(all_nodes) - 1), 8),
+           canvas.xlim = c(-1.1, 1.1), canvas.ylim = c(-1.1, 1.1))
+chordDiagram(flows, grid.col = grid_col, transparency = 0.15,
+             directional = 1, direction.type = "arrows",
+             link.arr.type = "big.arrow", annotationTrack = "grid",
+             preAllocateTracks = list(track.height = 0.05))
+circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+  xlim <- get.cell.meta.data("xlim")
+  ylim <- get.cell.meta.data("ylim")
+  sector.name <- get.cell.meta.data("sector.index")
+  circos.text(mean(xlim), ylim[1] + 0.5, sector.name,
+              facing = "clockwise", niceFacing = TRUE,
+              adj = c(0, 0.5), cex = 0.65, col = "grey20")
+}, bg.border = NA)
+dev.off()
+```

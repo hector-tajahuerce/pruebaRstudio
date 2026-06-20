@@ -55,3 +55,9 @@ SIPRI Military Expenditure Database. Disponible en: sipri.org/databases/milex
 El indicador representa el gasto en defensa de cada país como porcentaje de su PIB. 
 Un valor alto no implica necesariamente mayor capacidad militar absoluta, 
 sino mayor esfuerzo relativo respecto al tamaño de la economía.
+
+```{r}
+#| include: false
+
+ggsave("heatmap_otan.png", width = 6, height = 8, dpi = 150)
+```
