@@ -1,0 +1,74 @@
+---
+title: "Flujos globales de exportación de armas"
+image: chord_armstransfers.png
+date: 2026-06-20
+---
+
+## Gráfico
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 7
+
+library(circlize)
+library(dplyr)
+library(readr)
+
+flows <- read_csv("data/flows_import-export-top_2014-2025.csv")
+flows <- flows %>% filter(pct >= 20)
+
+col_exporters <- c(
+  "United States"  = "#2B7BAD",
+  "Russia"         = "#AD3B3B",
+  "France"         = "#3B6BAD",
+  "Germany"        = "#4A8A4A",
+  "China"          = "#B5621A",
+  "United Kingdom" = "#6B4AAD"
+)
+
+all_nodes <- unique(c(flows$from, flows$to))
+grid_col <- setNames(rep("#A8A8A8", length(all_nodes)), all_nodes)
+grid_col[names(col_exporters)] <- col_exporters
+
+importers_only <- setdiff(all_nodes, names(col_exporters))
+import_cols <- colorRampPalette(c("#7AAFC4", "#6A9DB8", "#5A8BAA"))(length(importers_only))
+grid_col[importers_only] <- import_cols
+
+par(mar = c(0, 0, 0, 0))
+circos.clear()
+circos.par(
+  gap.after = c(rep(2, length(all_nodes) - 1), 8),
+  canvas.xlim = c(-1.1, 1.1),
+  canvas.ylim = c(-1.1, 1.1)
+)
+
+chordDiagram(
+  flows,
+  grid.col = grid_col,
+  transparency = 0.15,
+  directional = 1,
+  direction.type = "arrows",
+  link.arr.type = "big.arrow",
+  annotationTrack = "grid",
+  preAllocateTracks = list(track.height = 0.05)
+)
+
+circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+  xlim <- get.cell.meta.data("xlim")
+  ylim <- get.cell.meta.data("ylim")
+  sector.name <- get.cell.meta.data("sector.index")
+  circos.text(mean(xlim), ylim[1] + 0.5, sector.name,
+              facing = "clockwise", niceFacing = TRUE,
+              adj = c(0, 0.5), cex = 0.65, col = "grey20")
+}, bg.border = NA)
+```
+
+## Fuente
+
+SIPRI Arms Transfers Database. Disponible en: sipri.org/databases/armstransfers
+
+## Nota metodológica
+
+Los flujos representan transferencias de armas mayores expresadas en millones de TIV (Trend Indicator Values), unidad propia de SIPRI que mide el valor de transferencia según capacidad militar del sistema, no precio de mercado. Se incluyen únicamente los flujos que superan el 20% de las importaciones totales de cada receptor en el periodo 2014-2025.

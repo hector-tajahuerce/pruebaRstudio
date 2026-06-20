@@ -1,0 +1,51 @@
+from,to,value,pct
+Russia,India,15297,48.0
+France,India,6055,19.0
+Israel,India,4143,13.0
+United States,India,3824,12.0
+United States,Saudi Arabia,22419,71.0
+United States,Qatar,7310,48.0
+France,Qatar,2741,18.0
+Italy,Qatar,2132,14.0
+United Kingdom,Qatar,1828,12.0
+United States,Ukraine,6173,41.0
+Germany,Ukraine,2108,14.0
+France,Egypt,4527,32.0
+Russia,Egypt,3537,25.0
+Germany,Egypt,1981,14.0
+United States,Egypt,1698,12.0
+United States,Australia,9533,70.0
+Spain,Australia,2724,20.0
+China,Pakistan,9155,76.0
+Russia,China,8362,72.0
+France,China,1278,11.0
+United States,United Arab Emirates,6848,59.0
+France,United Arab Emirates,1393,12.0
+United States,Japan,9698,95.0
+United States,South Korea,6639,69.0
+Germany,South Korea,2021,21.0
+Russia,Algeria,5522,61.0
+China,Algeria,1358,15.0
+Germany,Algeria,996,11.0
+United Kingdom,United States,1449,17.0
+Germany,United States,1108,13.0
+France,United States,1023,12.0
+Netherlands,United States,938,11.0
+United States,Israel,4742,70.0
+Germany,Israel,1762,26.0
+United States,United Kingdom,5324,79.0
+South Korea,Poland,2695,41.0
+United States,Poland,2630,40.0
+United States,Indonesia,1141,18.0
+Italy,Indonesia,1014,16.0
+United Kingdom,Indonesia,761,12.0
+South Korea,Indonesia,697,11.0
+France,Indonesia,634,10.0
+United States,Turkiye,2254,38.0
+Spain,Turkiye,1305,22.0
+Italy,Turkiye,1068,18.0
+Germany,Turkiye,712,12.0
+United States,Kuwait,3904,67.0
+Italy,Kuwait,1340,23.0
+United States,Iraq,2457,43.0
+Russia,Iraq,1886,33.0

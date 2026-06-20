@@ -16,3 +16,4 @@ format:
     code-fold: true
     code-summary: "Ver código"
     lang: es
+    css: styles.css

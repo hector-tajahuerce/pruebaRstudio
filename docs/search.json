@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Prueba",
     "section": "",
-    "text": "Descripcion\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGasto en defensa de los países de la OTAN\n\n\n\n\n\nNo hay resultados"
+    "text": "Descripcion\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFlujos globales de exportación de armas\n\n\n\n\n\n\n\n\n\n\n\n\nGasto en defensa de los países de la OTAN\n\n\n\n\n\nNo hay resultados"
   },
   {
     "objectID": "entries/01-nato-defense-spending/index.html",
@@ -33,5 +33,33 @@
     "title": "Gasto en defensa de los países de la OTAN",
     "section": "Nota metodológica",
     "text": "Nota metodológica\nEl indicador representa el gasto en defensa de cada país como porcentaje de su PIB. Un valor alto no implica necesariamente mayor capacidad militar absoluta, sino mayor esfuerzo relativo respecto al tamaño de la economía."
+  },
+  {
+    "objectID": "entries/02-arms-transfers/index.html",
+    "href": "entries/02-arms-transfers/index.html",
+    "title": "Flujos globales de exportación de armas",
+    "section": "",
+    "text": "Ver código\nlibrary(circlize)\nlibrary(dplyr)\nlibrary(readr)\n\nflows &lt;- read_csv(\"data/flows_import-export-top_2014-2025.csv\")\nflows &lt;- flows %&gt;% filter(pct &gt;= 20)\n\ncol_exporters &lt;- c(\n  \"United States\"  = \"#2B7BAD\",\n  \"Russia\"         = \"#AD3B3B\",\n  \"France\"         = \"#3B6BAD\",\n  \"Germany\"        = \"#4A8A4A\",\n  \"China\"          = \"#B5621A\",\n  \"United Kingdom\" = \"#6B4AAD\"\n)\n\nall_nodes &lt;- unique(c(flows$from, flows$to))\ngrid_col &lt;- setNames(rep(\"#A8A8A8\", length(all_nodes)), all_nodes)\ngrid_col[names(col_exporters)] &lt;- col_exporters\n\nimporters_only &lt;- setdiff(all_nodes, names(col_exporters))\nimport_cols &lt;- colorRampPalette(c(\"#7AAFC4\", \"#6A9DB8\", \"#5A8BAA\"))(length(importers_only))\ngrid_col[importers_only] &lt;- import_cols\n\npar(mar = c(0, 0, 0, 0))\ncircos.clear()\ncircos.par(\n  gap.after = c(rep(2, length(all_nodes) - 1), 8),\n  canvas.xlim = c(-1.1, 1.1),\n  canvas.ylim = c(-1.1, 1.1)\n)\n\nchordDiagram(\n  flows,\n  grid.col = grid_col,\n  transparency = 0.15,\n  directional = 1,\n  direction.type = \"arrows\",\n  link.arr.type = \"big.arrow\",\n  annotationTrack = \"grid\",\n  preAllocateTracks = list(track.height = 0.05)\n)\n\ncircos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {\n  xlim &lt;- get.cell.meta.data(\"xlim\")\n  ylim &lt;- get.cell.meta.data(\"ylim\")\n  sector.name &lt;- get.cell.meta.data(\"sector.index\")\n  circos.text(mean(xlim), ylim[1] + 0.5, sector.name,\n              facing = \"clockwise\", niceFacing = TRUE,\n              adj = c(0, 0.5), cex = 0.65, col = \"grey20\")\n}, bg.border = NA)"
+  },
+  {
+    "objectID": "entries/02-arms-transfers/index.html#gráfico",
+    "href": "entries/02-arms-transfers/index.html#gráfico",
+    "title": "Flujos globales de exportación de armas",
+    "section": "",
+    "text": "Ver código\nlibrary(circlize)\nlibrary(dplyr)\nlibrary(readr)\n\nflows &lt;- read_csv(\"data/flows_import-export-top_2014-2025.csv\")\nflows &lt;- flows %&gt;% filter(pct &gt;= 20)\n\ncol_exporters &lt;- c(\n  \"United States\"  = \"#2B7BAD\",\n  \"Russia\"         = \"#AD3B3B\",\n  \"France\"         = \"#3B6BAD\",\n  \"Germany\"        = \"#4A8A4A\",\n  \"China\"          = \"#B5621A\",\n  \"United Kingdom\" = \"#6B4AAD\"\n)\n\nall_nodes &lt;- unique(c(flows$from, flows$to))\ngrid_col &lt;- setNames(rep(\"#A8A8A8\", length(all_nodes)), all_nodes)\ngrid_col[names(col_exporters)] &lt;- col_exporters\n\nimporters_only &lt;- setdiff(all_nodes, names(col_exporters))\nimport_cols &lt;- colorRampPalette(c(\"#7AAFC4\", \"#6A9DB8\", \"#5A8BAA\"))(length(importers_only))\ngrid_col[importers_only] &lt;- import_cols\n\npar(mar = c(0, 0, 0, 0))\ncircos.clear()\ncircos.par(\n  gap.after = c(rep(2, length(all_nodes) - 1), 8),\n  canvas.xlim = c(-1.1, 1.1),\n  canvas.ylim = c(-1.1, 1.1)\n)\n\nchordDiagram(\n  flows,\n  grid.col = grid_col,\n  transparency = 0.15,\n  directional = 1,\n  direction.type = \"arrows\",\n  link.arr.type = \"big.arrow\",\n  annotationTrack = \"grid\",\n  preAllocateTracks = list(track.height = 0.05)\n)\n\ncircos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {\n  xlim &lt;- get.cell.meta.data(\"xlim\")\n  ylim &lt;- get.cell.meta.data(\"ylim\")\n  sector.name &lt;- get.cell.meta.data(\"sector.index\")\n  circos.text(mean(xlim), ylim[1] + 0.5, sector.name,\n              facing = \"clockwise\", niceFacing = TRUE,\n              adj = c(0, 0.5), cex = 0.65, col = \"grey20\")\n}, bg.border = NA)"
+  },
+  {
+    "objectID": "entries/02-arms-transfers/index.html#fuente",
+    "href": "entries/02-arms-transfers/index.html#fuente",
+    "title": "Flujos globales de exportación de armas",
+    "section": "Fuente",
+    "text": "Fuente\nSIPRI Arms Transfers Database. Disponible en: sipri.org/databases/armstransfers"
+  },
+  {
+    "objectID": "entries/02-arms-transfers/index.html#nota-metodológica",
+    "href": "entries/02-arms-transfers/index.html#nota-metodológica",
+    "title": "Flujos globales de exportación de armas",
+    "section": "Nota metodológica",
+    "text": "Nota metodológica\nLos flujos representan transferencias de armas mayores expresadas en millones de TIV (Trend Indicator Values), unidad propia de SIPRI que mide el valor de transferencia según capacidad militar del sistema, no precio de mercado. Se incluyen únicamente los flujos que superan el 20% de las importaciones totales de cada receptor en el periodo 2014-2025."
   }
 ]
